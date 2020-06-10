@@ -78,34 +78,39 @@ count = 0
 for GAMEID in weeks:
     try:
         print(f'getting gameweek {GAMEID}')
-        EVENT_FILENAME = f'/Users/sidthakur08/Github/arsenal-invincibles/data/games/Arsenal-{GAMEID}.csv'
+        if GAMEID == 35:
+            if count == 0:
+                count = 1
+                print("Getting first match for gameweek 35")
+                EVENT_FILENAME = f'/Users/sidthakur08/Github/arsenal-invincibles/data/games/Arsenal-{GAMEID}.csv'
+                home_team = match_data[match_data['match_week']==GAMEID]['home_team_home_team_name'].values[0]
+                away_team = match_data[match_data['match_week']==GAMEID]['away_team_away_team_name'].values[0]
+            else:
+                print("Getting second match for gameweek 35")
+                EVENT_FILENAME = f'/Users/sidthakur08/Github/arsenal-invincibles/data/games/Arsenal-{GAMEID}_1.csv'
+                home_team = match_data[match_data['match_week']==GAMEID]['home_team_home_team_name'].values[1]
+                away_team = match_data[match_data['match_week']==GAMEID]['away_team_away_team_name'].values[1]
+        else:
+            EVENT_FILENAME = f'/Users/sidthakur08/Github/arsenal-invincibles/data/games/Arsenal-{GAMEID}.csv'
+            home_team = match_data[match_data['match_week']==GAMEID]['home_team_home_team_name'].values[0]
+            away_team = match_data[match_data['match_week']==GAMEID]['away_team_away_team_name'].values[0]
+        
         event_data = pd.read_csv(EVENT_FILENAME)
         
-        home_team = match_data[match_data['match_week']==GAMEID]['home_team_home_team_name'].values[0]
-        away_team = match_data[match_data['match_week']==GAMEID]['away_team_away_team_name'].values[0]
-
         shots = event_data[event_data['type_name']=='Shot']
         shots = shots.dropna(axis=1).reset_index(drop=True)
         shots['location'] = convert_to_int(shots['location'])
 
         arsenal_shots = shots[shots['team_name']=='Arsenal']
 
-        fig1,ax = plot_shots_arsenal(arsenal_shots,'red',against= home_team if away_team=='Arsenal' else away_team)
+        ag = home_team if away_team == 'Arsenal' else away_team
+
+        fig1,ax = plot_shots_arsenal(arsenal_shots,'red',against= ag)
         fig2,ax = plot_shots_two(shots,home_team,away_team)
 
-        if GAMEID == 35:
-            if count == 0:
-                count=1
-                print('First game for 35')
-                fig1.savefig(f'/Users/sidthakur08/Github/arsenal-invincibles/shots/game_shots/arsenal/{GAMEID}_game.pdf')
-                fig2.savefig(f'/Users/sidthakur08/Github/arsenal-invincibles/shots/game_shots/game/{GAMEID}_game.pdf')
-            else:
-                print('Second game for 35')
-                fig1.savefig(f'/Users/sidthakur08/Github/arsenal-invincibles/shots/game_shots/arsenal/{GAMEID}_game_1.pdf')
-                fig2.savefig(f'/Users/sidthakur08/Github/arsenal-invincibles/shots/game_shots/game/{GAMEID}_game_1.pdf')
-        else:
-            fig1.savefig(f'/Users/sidthakur08/Github/arsenal-invincibles/shots/game_shots/arsenal/{GAMEID}_game.pdf')
-            fig2.savefig(f'/Users/sidthakur08/Github/arsenal-invincibles/shots/game_shots/game/{GAMEID}_game.pdf')
+        print(f'saving gameweek {GAMEID}')
+        fig1.savefig(f'/Users/sidthakur08/Github/arsenal-invincibles/shots/game_shots/arsenal/vs {ag} - {GAMEID}.pdf')
+        fig2.savefig(f'/Users/sidthakur08/Github/arsenal-invincibles/shots/game_shots/game/{home_team.capitalize()} vs {away_team.capitalize()} - {GAMEID}.pdf')
     except Exception as e:
         print(f"passing gameweek {GAMEID}")
         print(str(e))
