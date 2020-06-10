@@ -7,9 +7,11 @@ from ast import literal_eval
 import warnings
 warnings.filterwarnings("ignore")
 
+# setting the dimension of the pitch (default)
 pitchX = 120
 pitchY = 80
 
+# plotting the shots for one team
 def plot_shots_arsenal(shots,c,against):
     (fig,ax) = FCPython.createPitch(pitchX,pitchY,'yards','black')
     plt.figure(figsize=(12,8))
@@ -31,6 +33,7 @@ def plot_shots_arsenal(shots,c,against):
     ax.set_title(f'{team_name} vs {against}')
     return (fig,ax)
 
+# plotting the shots for both the teams on one pitch
 def plot_shots_two(shots,home_team,away_team):
     (fig,ax) = FCPython.createPitch(pitchX,pitchY,'yards','black')
     plt.figure(figsize=(12,8))
@@ -70,14 +73,17 @@ def plot_shots_two(shots,home_team,away_team):
     ax.legend([shot_circle_home,shot_circle_away],[home_team.capitalize(),away_team.capitalize()],loc=1)
     return (fig,ax)
 
+# getting the matches data for the season
 MATCH_FILENAME = f'/Users/sidthakur08/GitHub/arsenal-invincibles/data/matches.csv'
 match_data = pd.read_csv(MATCH_FILENAME)
 weeks = match_data['match_week'].values
 count = 0
 
+# iterating through the gameweeks
 for GAMEID in weeks:
     try:
         print(f'getting gameweek {GAMEID}')
+        # two fixtures were present in gameweek 35 ,i.e., tottenham and birmingham
         if GAMEID == 35:
             if count == 0:
                 count = 1
@@ -95,19 +101,25 @@ for GAMEID in weeks:
             home_team = match_data[match_data['match_week']==GAMEID]['home_team_home_team_name'].values[0]
             away_team = match_data[match_data['match_week']==GAMEID]['away_team_away_team_name'].values[0]
         
+        # reading the event data for the match
         event_data = pd.read_csv(EVENT_FILENAME)
         
+        # getting the shots data
         shots = event_data[event_data['type_name']=='Shot']
         shots = shots.dropna(axis=1).reset_index(drop=True)
         shots['location'] = convert_to_int(shots['location'])
 
+        # getting shots by arsenal
         arsenal_shots = shots[shots['team_name']=='Arsenal']
 
+        # getting the team facing arsenal
         ag = home_team if away_team == 'Arsenal' else away_team
 
+        # calling functions to plot the shots
         fig1,ax = plot_shots_arsenal(arsenal_shots,'red',against= ag)
         fig2,ax = plot_shots_two(shots,home_team,away_team)
 
+        # saving the plots
         print(f'saving gameweek {GAMEID}')
         fig1.savefig(f'/Users/sidthakur08/Github/arsenal-invincibles/shots/game_shots/arsenal/vs {ag} - {GAMEID}.pdf')
         fig2.savefig(f'/Users/sidthakur08/Github/arsenal-invincibles/shots/game_shots/game/{home_team.capitalize()} vs {away_team.capitalize()} - {GAMEID}.pdf')
