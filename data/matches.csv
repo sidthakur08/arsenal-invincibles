@@ -1,0 +1,33 @@
+away_score,away_team_away_team_id,away_team_away_team_name,home_score,home_team_home_team_id,home_team_home_team_name,match_date,match_id,match_week
+1,29,Everton,2,1,Arsenal,2003-08-16,3749493,1
+4,1,Arsenal,0,47,Middlesbrough,2003-08-24,3749358,2
+2,1,Arsenal,1,36,Manchester City,2003-08-31,3749454,4
+1,105,Portsmouth,1,1,Arsenal,2003-09-13,3749296,5
+0,1,Arsenal,0,39,Manchester United,2003-09-21,3749552,6
+2,37,Newcastle United,3,1,Arsenal,2003-09-26,3749528,7
+2,1,Arsenal,1,24,Liverpool,2003-10-04,3749253,8
+1,33,Chelsea,2,1,Arsenal,2003-10-18,3749079,9
+1,1,Arsenal,1,75,Charlton Athletic,2003-10-26,3749526,10
+4,1,Arsenal,1,101,Leeds United,2003-11-01,3749346,11
+1,38,Tottenham Hotspur,2,1,Arsenal,2003-11-08,3749196,12
+3,1,Arsenal,0,54,Birmingham City,2003-11-22,3749434,13
+0,55,Fulham,0,1,Arsenal,2003-11-30,3749192,14
+0,98,Blackburn Rovers,1,1,Arsenal,2003-12-14,3749360,16
+1,1,Arsenal,1,328,Bolton Wanderers,2003-12-20,3749278,17
+0,46,Wolverhampton Wanderers,3,1,Arsenal,2003-12-26,3749522,18
+1,1,Arsenal,0,25,Southampton,2003-12-29,3749310,19
+1,47,Middlesbrough,4,1,Arsenal,2004-01-10,3749153,21
+2,1,Arsenal,0,59,Aston Villa,2004-01-18,3749133,22
+1,36,Manchester City,2,1,Arsenal,2004-02-01,3749233,23
+3,1,Arsenal,1,46,Wolverhampton Wanderers,2004-02-07,3749052,24
+2,1,Arsenal,1,33,Chelsea,2004-02-21,3749276,26
+1,75,Charlton Athletic,2,1,Arsenal,2004-02-28,3749642,27
+2,1,Arsenal,0,98,Blackburn Rovers,2004-03-13,3749465,28
+1,328,Bolton Wanderers,2,1,Arsenal,2004-03-20,3749403,29
+1,39,Manchester United,1,1,Arsenal,2004-03-28,3749246,30
+2,24,Liverpool,4,1,Arsenal,2004-04-09,3749448,31
+0,101,Leeds United,5,1,Arsenal,2004-04-16,3749453,33
+2,1,Arsenal,2,38,Tottenham Hotspur,2004-04-25,3749068,35
+0,54,Birmingham City,0,1,Arsenal,2004-05-01,3749462,35
+1,1,Arsenal,0,55,Fulham,2004-05-09,3749603,37
+1,22,Leicester City,2,1,Arsenal,2004-05-15,3749257,38
