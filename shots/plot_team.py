@@ -8,26 +8,28 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # setting the dimension of the pitch (default)
-pitchX = 120
-pitchY = 80
+statsbombX = 120
+statsbombY = 80
+highburyX = 100
+highburyY = 67
 
 # plotting the shots for one team
 def plot_shots_arsenal(shots,c,against):
-    (fig,ax) = FCPython.createPitch(pitchX,pitchY,'yards','black')
+    (fig,ax) = FCPython.createPitch(highburyX,highburyY,'yards','black')
     plt.figure(figsize=(12,8))
     for i,shot in shots.iterrows():
-        x = shot['location'][0]
-        y = shot['location'][1]
+        x = shot['locXN']
+        y = shot['locYN']
         goal = shot['shot_outcome_name'] == 'Goal'
         team_name = shot['team_name']
         circle_size =  np.sqrt(shot['shot_statsbomb_xg']*15)
         if goal:
-            shot_circle = plt.Circle((pitchX-x,y),color=c,radius=circle_size)
-            #plt.text((x+1),(pitchY-y+1),shot['player_name'])
+            shot_circle = plt.Circle((highburyX-x,y),color=c,radius=circle_size)
+            #plt.text((x+1),(highburyY-y+1),shot['player_name'])
             label_text = f"{shot['player_name']}({np.round(shot['shot_statsbomb_xg'],decimals=3)})"
-            ax.annotate(label_text,(pitchX-x-10,y+2))
+            ax.annotate(label_text,(highburyX-x-10,y+2))
         else:
-            shot_circle = plt.Circle((pitchX-x,y),color=c,radius=circle_size)
+            shot_circle = plt.Circle((highburyX-x,y),color=c,radius=circle_size)
             shot_circle.set_alpha(.2)
         ax.add_patch(shot_circle)
     ax.set_title(f'{team_name} vs {against}')
@@ -35,11 +37,11 @@ def plot_shots_arsenal(shots,c,against):
 
 # plotting the shots for both the teams on one pitch
 def plot_shots_two(shots,home_team,away_team):
-    (fig,ax) = FCPython.createPitch(pitchX,pitchY,'yards','black')
+    (fig,ax) = FCPython.createPitch(highburyX,highburyY,'yards','black')
     plt.figure(figsize=(12,8))
     for i,shot in shots.iterrows():
-        x = shot['location'][0]
-        y = shot['location'][1]
+        x = shot['locXN']
+        y = shot['locYN']
         goal = shot['shot_outcome_name'] == 'Goal'
         team_name = shot['team_name']
         circle_size =  np.sqrt(shot['shot_statsbomb_xg']*15)
@@ -51,21 +53,21 @@ def plot_shots_two(shots,home_team,away_team):
             away_c = 'red'
         if (home_team.lower() == team_name.lower()):
             if goal:
-                shot_circle_home = plt.Circle((x,pitchY-y),color=home_c,radius=circle_size)
-                #plt.text((x+1),(pitchY-y+1),shot['player_name'])
+                shot_circle_home = plt.Circle((x,highburyY-y),color=home_c,radius=circle_size)
+                #plt.text((x+1),(highburyY-y+1),shot['player_name'])
                 label_text = f"{shot['player_name']}({np.round(shot['shot_statsbomb_xg'],decimals=3)})"
-                ax.annotate(label_text,(x-10,pitchY-y+2))
+                ax.annotate(label_text,(x-10,highburyY-y+2))
             else:
-                shot_circle_home = plt.Circle((x,pitchY-y),color=home_c,radius=circle_size)
+                shot_circle_home = plt.Circle((x,highburyY-y),color=home_c,radius=circle_size)
                 shot_circle_home.set_alpha(.2)
             ax.add_patch(shot_circle_home)
         elif (away_team.lower() == team_name.lower()):
             if goal:
-                shot_circle_away = plt.Circle((pitchX-x,y),color=away_c,radius=circle_size)
+                shot_circle_away = plt.Circle((highburyX-x,y),color=away_c,radius=circle_size)
                 label_text = f"{shot['player_name']}({np.round(shot['shot_statsbomb_xg'],decimals=3)})"
-                ax.annotate(label_text,(pitchX-x-10,y+2))
+                ax.annotate(label_text,(highburyX-x-10,y+2))
             else:
-                shot_circle_away = plt.Circle((pitchX-x,y),color=away_c,radius=circle_size)
+                shot_circle_away = plt.Circle((highburyX-x,y),color=away_c,radius=circle_size)
                 shot_circle_away.set_alpha(.2)
             ax.add_patch(shot_circle_away)
     title = f'{home_team.upper()} vs {away_team.upper()}'
@@ -108,7 +110,10 @@ for GAMEID in weeks:
         shots = event_data[event_data['type_name']=='Shot']
         shots = shots.dropna(axis=1).reset_index(drop=True)
         shots['location'] = convert_to_int(shots['location'])
-
+        shots['locX'] = [i[0] for i in shots['location']]
+        shots['locY'] = [i[1] for i in shots['location']]
+        shots['locXN'] = shots.locX / statsbombX * highburyX
+        shots['locYN'] = shots.locY / statsbombY * highburyY
         # getting shots by arsenal
         arsenal_shots = shots[shots['team_name']=='Arsenal']
 
