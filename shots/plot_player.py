@@ -47,6 +47,6 @@ for p in shots_arsenal['player_name'].value_counts().keys():
         player = shots_arsenal[shots_arsenal['player_name'] == p].reset_index(drop=True)
         fig,ax = plot_shots_player(player)
         print(f"saving shots for {p}")
-        fig.savefig(f'/Users/sidthakur08/ML/Code/Soccer/Arsenal Invincible/shots/player_shots/goal/{p}_shots.jpeg')
+        fig.savefig(f'/Users/sidthakur08/ML/Code/Soccer/Arsenal Invincible/shots/player_shots/goal/{p}_shots.pdf')
     except Exception as e:
         print(e)
