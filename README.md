@@ -21,3 +21,7 @@ Some inference can be generated about the types and amounts of chances created b
   - [Twitter](https://twitter.com/shushrut_sharma)<br>
 - Vedant Agarwal<br>
   - [Github](https://github.com/vedantagarwal4)<br>
+
+### Data provided by [Statsbomb](https://statsbomb.com)
+- [Twitter](https://twitter.com/mixedknuts?s=20)
+- [Article](https://statsbomb.com/2020/06/the-invincibles-project-and-classics-data-pack-1/)
