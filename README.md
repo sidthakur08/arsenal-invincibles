@@ -9,5 +9,15 @@ Plotted the individual player shots of goals, no goals and both. Thierry Henry a
 - ExpectedGoals(xG) vs Shot Count<br>
 Some inference can be generated about the types and amounts of chances created by Arsenal and the opposition team in a single match by plotting a line plot between the xG of a shot and the frequency of shots 
 
-## Next to come
-- pass maps
+## This is inspired by the works of
+### [Statisfy](https://github.com/vivekjagannath/statisfy) - A repository consisting of basic football analysis on event and tracking data by
+- Vivek Jagannath<br>
+  - [Github](https://github.com/vivekjagannath) <br>
+- Siddhant Thakur<br>
+  - [Github](https://github.com/sidthakur08)<br>
+  - [Twitter](https://twitter.com/sidtweetsnow)<br>
+- Shushrut Sharma<br>
+  - [Github](https://github.com/shushrutsharma)<br>
+  - [Twitter](https://twitter.com/shushrut_sharma)<br>
+- Vedant Agarwal<br>
+  - [Github](https://github.com/vedantagarwal4)<br>
